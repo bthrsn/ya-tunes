@@ -1,6 +1,7 @@
 // Порядок, которому следует придерживаться пронумерован
 
 //1. Сначала идут импорты. Это импорты функции запуска радио и остальных
+// Если собираем с webpack, то не нужно писать расширение файла
 import {
   radioPlayerInit
 } from './radioPlayer.js';
@@ -40,6 +41,7 @@ playerBtn.forEach((btn, i) => btn.addEventListener('click', () => {
 
 // 5. И в конце, вызовы функций. В основном это init функции
 // Вызов функций запуска радио и прочих
-radioPlayerInit();
+
 videoPlayerInit();
+radioPlayerInit();
 musicPlayerInit();

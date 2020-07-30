@@ -1,17 +1,13 @@
 export const videoPlayerInit = () => {
-  // video-player
-  // video-button__play
-  // video-button__stop
-  // video-progress
-  // video-time__passed
-  // video-time video-time__total
 
   const videoPlayer = document.querySelector('.video-player'),
     videoButtonPlay = document.querySelector('.video-button__play'),
     videoButtonStop = document.querySelector('.video-button__stop'),
     videoProgress = document.querySelector('.video-progress'),
     videoTimePassed = document.querySelector('.video-time__passed'),
-    videoTimeTotal = document.querySelector('.video-time__total');
+    videoTimeTotal = document.querySelector('.video-time__total'),
+    videoFullscreen = document.querySelector('.video-fullscreen'),
+    videoVolume = document.querySelector('.video-volume');
 
   // функция для смены иконок на паузе и на плее
   const toggleIcon = () => {
@@ -43,6 +39,22 @@ export const videoPlayerInit = () => {
   // функция добавления 0 перед временем
   const addZero = n => n < 10 ? `0${n}` : n;
 
+  // обработчик событий на звук
+  videoVolume.addEventListener('input', () => {
+    videoPlayer.volume = videoVolume.value / 100;
+  });
+  // Чтобы сразу ползунок был на половине
+  videoPlayer.volume = 0.5;
+  // чтобы ползунок находился там, где был изначально
+  videoVolume.value = videoPlayer.volume * 100;
+
+  // jбработчик событий на фулскрин
+  // requestFullscreen раотает в сафари и файерфоксе
+  // webkitEnterFullScreen в хроме
+  videoFullscreen.addEventListener('click', () => {
+    videoPlayer.requestFullscreen();
+  })
+
   // обработчик событий на самом видео плеере
   videoPlayer.addEventListener('click', togglePlay);
   videoButtonPlay.addEventListener('click', togglePlay);
@@ -71,11 +83,11 @@ export const videoPlayerInit = () => {
 
   });
 
-  videoProgress.addEventListener('change', () => {
+  videoProgress.addEventListener('input', () => {
     const duration = videoPlayer.duration;
     const value = videoProgress.value;
 
-    videoPlayer.currentTime = (value + duration) / 100;
+    videoPlayer.currentTime = (value * duration) / 100;
   })
 
 

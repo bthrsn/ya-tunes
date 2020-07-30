@@ -1,3 +1,7 @@
+import {
+  addZero
+} from './supScript.js';
+
 export const videoPlayerInit = () => {
 
   const videoPlayer = document.querySelector('.video-player'),
@@ -35,9 +39,6 @@ export const videoPlayerInit = () => {
     videoPlayer.pause();
     videoPlayer.currentTime = 0;
   }
-
-  // функция добавления 0 перед временем
-  const addZero = n => n < 10 ? `0${n}` : n;
 
   // обработчик событий на звук
   videoVolume.addEventListener('input', () => {

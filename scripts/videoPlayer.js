@@ -89,7 +89,13 @@ export const videoPlayerInit = () => {
     const value = videoProgress.value;
 
     videoPlayer.currentTime = (value * duration) / 100;
-  })
+  });
 
+  // добавляем метод для отключения этого плеера, когда другие плееры активны
+  videoPlayerInit.stop = () => {
+    if (!videoPlayer.paused) {
+      stopPlay();
+    }
+  }
 
 }

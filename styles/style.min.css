@@ -758,13 +758,15 @@ input[type=range]:focus::-ms-fill-upper {
   margin: 5px;
 }
 
-.radio-volume-icon {
+.radio-volume-icon,
+.audio-volume-icon {
   margin: 5px;
   font-size: 36px;
 }
 
 .video-volume,
-.radio-volume {
+.radio-volume,
+.audio-volume {
   max-width: 100px;
 }
 

@@ -81,5 +81,11 @@ export const radioPlayerInit = () => {
       audio.pause();
     }
     changeIconPlay();
-  })
+  });
+
+  // добавляем метод для отключения этого плеера, когда другие плееры активны
+  radioPlayerInit.stop = () => {
+    audio.pause();
+    changeIconPlay();
+  }
 }

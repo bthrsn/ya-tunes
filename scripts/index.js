@@ -28,6 +28,10 @@ const deactivationPlayer = () => {
     item.classList.remove('active'));
   playerBlock.forEach(item =>
     item.classList.remove('active'));
+
+  videoPlayerInit.stop();
+  radioPlayerInit.stop();
+  musicPlayerInit.stop();
 }
 
 // 4. Следом обработчики событий

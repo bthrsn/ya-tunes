@@ -12,11 +12,17 @@ export const musicPlayerInit = () => {
     audioTimePassed = document.querySelector('.audio-time__passed'),
     audioProgress = document.querySelector('.audio-progress'),
     audioProgressTiming = document.querySelector('.audio-progress__timing'),
-    audioTimeTotal = document.querySelector('.audio-time__total');
+    audioTimeTotal = document.querySelector('.audio-time__total'),
+    audioVolume = document.querySelector('.audio-volume'),
+    audioMute = document.querySelector('.audio-mute');
 
   // Так как Бэкенда нет - все файлы из папки аудио получаем вручную
   const playlist = ['hello', 'flow', 'speed'];
 
+  // переменная для mute звука
+  let prevVolume = 0.5;
+
+  // Переменная для номера трека
   let trackIndex = 0;
 
   // Функция загрузки песен
@@ -36,7 +42,7 @@ export const musicPlayerInit = () => {
 
   // функция для переключения треков назад
   const prevTrack = () => {
-    if (trackIndex !== 0) {
+    if (trackIndex) {
       trackIndex--;
     } else {
       trackIndex = playlist.length - 1;
@@ -112,5 +118,30 @@ export const musicPlayerInit = () => {
     const allWidth = audioProgress.clientWidth;
     const progress = (x / allWidth) * audioPlayer.duration;
     audioPlayer.currentTime = progress;
+  });
+
+  // обработчик событий на звук
+  audioVolume.addEventListener('input', () => {
+    audioPlayer.volume = audioVolume.value / 100;
+    prevVolume = audioPlayer.volume;
+  });
+  // обработчик событий на mute звука
+  audioMute.addEventListener('click', () => {
+    if (audioPlayer.volume) {
+      prevVolume = audioPlayer.volume;
+      audioPlayer.volume = 0;
+    } else {
+      audioPlayer.volume = prevVolume;
+    }
   })
+
+  // добавляем метод для отключения этого плеера, когда другие плееры активны
+  musicPlayerInit.stop = () => {
+    if (!audioPlayer.paused) {
+      audioPlayer.pause();
+      audio.classList.remove('play');
+      audioButtonPlay.classList.remove('fa-pause');
+      audioButtonPlay.classList.add('fa-play');
+    }
+  }
 }

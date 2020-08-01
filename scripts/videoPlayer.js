@@ -49,7 +49,7 @@ export const videoPlayerInit = () => {
   // чтобы ползунок находился там, где был изначально
   videoVolume.value = videoPlayer.volume * 100;
 
-  // jбработчик событий на фулскрин
+  // oбработчик событий на фулскрин
   // requestFullscreen раотает в сафари и файерфоксе
   // webkitEnterFullScreen в хроме
   videoFullscreen.addEventListener('click', () => {

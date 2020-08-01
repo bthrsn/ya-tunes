@@ -6,7 +6,12 @@ export const radioPlayerInit = () => {
     radioHeaderBig = document.querySelector('.radio-header__big'),
     radioCoverImg = document.querySelector('.radio-cover__img'),
     radioItem = document.querySelectorAll('.radio-item'),
-    radioStop = document.querySelector('.radio-stop');
+    radioStop = document.querySelector('.radio-stop'),
+    radioVolume = document.querySelector('.radio-volume'),
+    radioMute = document.querySelector('.radio-mute');
+
+  // переменная для mute звука
+  let prevVolume = 0.5;
 
   // Конструктор аудио - новая функция audio
   const audio = new Audio();
@@ -32,6 +37,21 @@ export const radioPlayerInit = () => {
     radioItem.forEach(item => item.classList.remove('select'));
     elem.classList.add('select');
   }
+
+  // обработчик событий на звук
+  radioVolume.addEventListener('input', () => {
+    audio.volume = radioVolume.value / 100;
+    prevVolume = audio.volume;
+  });
+  // обработчик событий на mute звука
+  radioMute.addEventListener('click', () => {
+    if (audio.volume) {
+      prevVolume = audio.volume;
+      audio.volume = 0;
+    } else {
+      audio.volume = prevVolume;
+    }
+  })
 
   // Получаем путь через делегирование
   radioNavigation.addEventListener('change', event => {

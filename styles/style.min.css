@@ -758,12 +758,19 @@ input[type=range]:focus::-ms-fill-upper {
   margin: 5px;
 }
 
-.video-volume {
+.radio-volume-icon {
+  margin: 5px;
+  font-size: 36px;
+}
+
+.video-volume,
+.radio-volume {
   max-width: 100px;
 }
 
 .video-fullscreen {
   margin-right: 5px;
 }
+
 
 /*# sourceMappingURL=style.min.css.map */
